@@ -17,12 +17,6 @@ export const frontendServer = {
 };
 
 export const jwtConfig = {
-  refreshExpire: {
-    ms() {
-      return ms(this.value);
-    },
-    value: get('REFRESH_EXPIRE').asString(),
-  },
   accessExpire: {
     ms() {
       return ms(this.value);

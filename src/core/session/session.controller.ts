@@ -1,35 +1,29 @@
-import { Controller, Post, Res } from '@nestjs/common';
-import { type Response } from 'express';
+import { Controller, Post } from '@nestjs/common';
 import { LoggedUserRdo } from '#src/core/users/rdo/logged-user.rdo';
 import { SessionService } from '#src/core/session/session.service';
-import { backendServer } from '#src/common/configs/config';
-import { Cookie } from '#src/common/decorators/cookie.decorator';
-import { ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiHeader, ApiTags } from '@nestjs/swagger';
+import { Session } from '#src/common/decorators/session.decorator';
+import { type RequestSession } from '#src/common/types/request-session.type';
+import { AuthGuard } from '#src/common/decorators/guards/authGuard.decorator';
 
 @ApiTags('session')
 @Controller('api/session')
 export class SessionController {
   constructor(private readonly sessionService: SessionService) {}
 
+  @ApiHeader({
+    name: 'Authorization',
+    required: true,
+    schema: { format: 'Bearer ${AccessToken}' },
+  })
+  @AuthGuard()
   @ApiCreatedResponse({ type: LoggedUserRdo })
   @Post('refresh')
-  async refresh(
-    @Res({ passthrough: true }) response: Response,
-    @Cookie('refreshToken') refreshToken: string,
-  ): Promise<LoggedUserRdo> {
-    const newSession = await this.sessionService.refreshSession(refreshToken);
-
-    response.cookie('refreshToken', newSession.refreshToken, {
-      expires: newSession.sessionExpireAt,
-      secure: backendServer.secure,
-      httpOnly: true,
-    });
-
-    return new LoggedUserRdo(
-      newSession.refreshToken,
-      newSession.accessToken,
-      newSession.sessionExpireAt,
-      newSession.phone,
+  async refresh(@Session() session: RequestSession): Promise<LoggedUserRdo> {
+    return await this.sessionService.refreshSession(
+      await this.sessionService.findOne({
+        where: { sessionId: session.sessionId },
+      }),
     );
   }
 }

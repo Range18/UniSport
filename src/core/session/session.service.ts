@@ -38,7 +38,7 @@ export class SessionService extends BaseEntityService<SessionEntity> {
       );
     }
 
-    const expireAt = new Date(Date.now() + jwtConfig.refreshExpire.ms());
+    const expireAt = new Date(Date.now() + jwtConfig.accessExpire.ms());
 
     const session = await this.save({
       user: user,
@@ -46,13 +46,6 @@ export class SessionService extends BaseEntityService<SessionEntity> {
     });
 
     return {
-      refreshToken: await this.tokenService.signAsync(
-        {
-          userId: payload.userId,
-          sessionId: session.sessionId,
-        } as TokenPayload,
-        { expiresIn: jwtConfig.refreshExpire.value },
-      ),
       accessToken: await this.tokenService.signAsync(
         {
           userId: payload.userId,
