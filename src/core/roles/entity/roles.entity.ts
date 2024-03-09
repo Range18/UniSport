@@ -14,10 +14,6 @@ export class RolesEntity extends BaseEntity {
   @Column({ nullable: false, unique: true })
   name: string;
 
-  @ApiProperty({ nullable: true })
-  @Column({ nullable: true })
-  description?: string;
-
   @Exclude()
   @OneToMany(() => UserEntity, (user) => user.role)
   users: UserEntity[];

@@ -35,6 +35,7 @@ export class AuthService {
       // password: await bcrypt.hash(createUserDto.password, passwordSaltRounds),
       password: createUserDto.password,
       phone: createUserDto.phone,
+      role: { name: createUserDto.role },
     });
 
     const session = await this.sessionService.createSession({
