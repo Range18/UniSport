@@ -8,6 +8,11 @@ export class CreateUserDto {
   readonly firstname: string;
 
   @IsString()
+  @IsNotEmpty()
+  @ApiProperty()
+  readonly surname: string;
+
+  @IsString()
   @ApiProperty()
   readonly phone: string;
 

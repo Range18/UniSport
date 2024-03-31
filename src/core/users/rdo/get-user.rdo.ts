@@ -10,6 +10,9 @@ export class GetUserRdo {
   readonly firstname: string;
 
   @ApiProperty()
+  readonly surname: string;
+
+  @ApiProperty()
   readonly phone: string;
 
   @ApiProperty({ type: () => RolesEntity })
@@ -28,6 +31,7 @@ export class GetUserRdo {
   constructor(user: UserEntity) {
     this.id = user.id;
     this.firstname = user.firstname;
+    this.surname = user.surname;
     this.phone = user.phone;
     this.role = user.role;
     //TODO

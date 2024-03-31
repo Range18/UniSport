@@ -33,6 +33,7 @@ export class AuthService {
 
     const userEntity = await this.userService.save({
       firstname: createUserDto.firstname,
+      surname: createUserDto.surname,
       //TODO Enable
       // password: await bcrypt.hash(createUserDto.password, passwordSaltRounds),
       password: createUserDto.password,
