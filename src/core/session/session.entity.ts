@@ -14,7 +14,10 @@ export class SessionEntity extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   readonly id: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.sessions)
+  @ManyToOne(() => UserEntity, (user) => user.sessions, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'user' })
   readonly user: UserEntity;
 

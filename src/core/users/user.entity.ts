@@ -24,11 +24,16 @@ export class UserEntity extends BaseEntity {
   @Column({ nullable: false })
   password: string;
 
-  @ManyToOne(() => RolesEntity, (role) => role.users, { nullable: false })
+  @ManyToOne(() => RolesEntity, (role) => role.users, {
+    nullable: false,
+    onDelete: 'CASCADE',
+  })
   @JoinColumn({ name: 'role' })
   role: RolesEntity;
 
-  @OneToMany(() => SessionEntity, (session) => session.user)
+  @OneToMany(() => SessionEntity, (session) => session.user, {
+    onDelete: 'CASCADE',
+  })
   sessions: SessionEntity[];
 
   //TODO

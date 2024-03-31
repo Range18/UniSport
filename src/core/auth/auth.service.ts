@@ -6,6 +6,7 @@ import { ApiException } from '#src/common/exception-handler/api-exception';
 import { SessionService } from '../session/session.service';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { AllExceptions } from '#src/common/exception-handler/exeption-types/all-exceptions';
+import { RolesService } from '#src/core/roles/roles.service';
 import AuthExceptions = AllExceptions.AuthExceptions;
 import UserExceptions = AllExceptions.UserExceptions;
 
@@ -13,6 +14,7 @@ import UserExceptions = AllExceptions.UserExceptions;
 export class AuthService {
   constructor(
     private readonly userService: UserService,
+    private readonly rolesService: RolesService,
     private readonly sessionService: SessionService,
   ) {}
 
@@ -35,7 +37,9 @@ export class AuthService {
       // password: await bcrypt.hash(createUserDto.password, passwordSaltRounds),
       password: createUserDto.password,
       phone: createUserDto.phone,
-      role: { name: createUserDto.role },
+      role: await this.rolesService.findOne({
+        where: { name: createUserDto.role },
+      }),
     });
 
     const session = await this.sessionService.createSession({
@@ -45,7 +49,7 @@ export class AuthService {
     return new LoggedUserRdo(
       session.accessToken,
       session.sessionExpireAt,
-      user.phone,
+      userEntity.phone,
     );
   }
 
