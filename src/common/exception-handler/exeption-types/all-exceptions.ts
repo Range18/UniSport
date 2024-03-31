@@ -21,6 +21,10 @@ export namespace AllExceptions {
     NoRequiredRole = 'You are not allowed to do that action, because of your role',
   }
 
+  export enum RolesExceptions {
+    NotFound = 'Role is not found',
+  }
+
   export enum StorageExceptions {
     ExtNotAllowed = 'File extension is not allowed',
   }

@@ -19,9 +19,12 @@ export class AuthService {
   ) {}
 
   async register(createUserDto: CreateUserDto): Promise<LoggedUserRdo> {
-    const user = await this.userService.findOne({
-      where: { phone: createUserDto.phone },
-    });
+    const user = await this.userService.findOne(
+      {
+        where: { phone: createUserDto.phone },
+      },
+      false,
+    );
 
     if (user) {
       throw new ApiException(

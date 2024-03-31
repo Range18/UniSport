@@ -15,14 +15,24 @@ import SessionExceptions = AllExceptions.SessionExceptions;
 import UserExceptions = AllExceptions.UserExceptions;
 
 @Injectable()
-export class SessionService extends BaseEntityService<SessionEntity> {
+export class SessionService extends BaseEntityService<
+  SessionEntity,
+  'SessionExceptions'
+> {
   constructor(
     @InjectRepository(SessionEntity)
     private readonly sessionRepository: Repository<SessionEntity>,
     private readonly tokenService: TokenService,
     private readonly userService: UserService,
   ) {
-    super(sessionRepository);
+    super(
+      sessionRepository,
+      new ApiException<'SessionExceptions'>(
+        HttpStatus.NOT_FOUND,
+        'SessionExceptions',
+        SessionExceptions.SessionNotFound,
+      ),
+    );
   }
 
   async createSession(payload: CreateSession): Promise<LoggedUserRdo> {
@@ -84,7 +94,7 @@ export class SessionService extends BaseEntityService<SessionEntity> {
 
   override async removeOne(
     entityOrToken: FindOneOptions<SessionEntity> | SessionEntity | string,
-    throwError = false,
+    throwError = true,
   ): Promise<void> {
     const entity =
       typeof entityOrToken === 'string'
