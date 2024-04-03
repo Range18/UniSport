@@ -14,6 +14,13 @@ export namespace AllExceptions {
   export enum UserExceptions {
     UserNotFound = 'User is not found',
     UserAlreadyExists = 'User already exists',
+    RelationConflict = 'You can not be parent or child of yourself',
+  }
+
+  export enum ChildExceptions {
+    ChildNotFound = 'Child is not yours already',
+    ChildIsAlreadyYours = 'Child is already yours',
+    IsNotChild = 'User is not child',
   }
 
   export enum PermissionExceptions {

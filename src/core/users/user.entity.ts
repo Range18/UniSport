@@ -2,6 +2,8 @@ import {
   Column,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -26,6 +28,23 @@ export class UserEntity extends BaseEntity {
 
   @Column({ nullable: false })
   password: string;
+
+  @ManyToMany(() => UserEntity, (user) => user.parents, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  @JoinTable({
+    name: 'children_to_parents',
+    joinColumn: { name: 'parentId' },
+    inverseJoinColumn: { name: 'childId' },
+  })
+  children?: UserEntity[];
+
+  @ManyToMany(() => UserEntity, (user) => user.children, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  parents?: UserEntity[];
 
   @ManyToOne(() => RolesEntity, (role) => role.users, {
     nullable: false,
