@@ -6,6 +6,8 @@ import { typeOrmConfig } from '#src/common/configs/database.config';
 import { AuthModule } from '#src/core/auth/auth.module';
 import { UserModule } from '#src/core/users/user.module';
 import { RolesModule } from '#src/core/roles/roles.module';
+import { SectionsCategoriesModule } from '#src/core/sections-categories/sections-categories.module';
+import { SectionsModule } from '#src/core/sections/sections.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { RolesModule } from '#src/core/roles/roles.module';
     AuthModule,
     UserModule,
     RolesModule,
+    SectionsCategoriesModule,
+    SectionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

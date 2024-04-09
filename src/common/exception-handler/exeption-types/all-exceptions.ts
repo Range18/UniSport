@@ -11,6 +11,13 @@ export namespace AllExceptions {
     SessionExpired = 'Session expired',
   }
 
+  export enum SectionExceptions {
+    SectionNotFound = 'Section is not found',
+  }
+
+  export enum SectionCategoryExceptions {
+    SectionCategoryNotFound = 'SectionCategory is not found',
+  }
   export enum UserExceptions {
     UserNotFound = 'User is not found',
     UserAlreadyExists = 'User already exists',

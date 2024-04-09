@@ -4,11 +4,17 @@ import { UserService } from '#src/core/users/user.service';
 import { User } from '#src/common/decorators/User.decorator';
 import { type UserRequest } from '#src/common/types/user-request.type';
 import { AddOrRemoveChildDto } from '#src/core/users/children/dto/addChild.dto';
-import { ApiBody, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GetUserRdo } from '#src/core/users/rdo/get-user.rdo';
 import { AuthGuard } from '#src/common/decorators/guards/authGuard.decorator';
 import { RolesGuard } from '#src/common/decorators/guards/roles-guard.decorator';
 
+@ApiTags('Children')
 @Controller('api/users/children')
 export class ChildrenController {
   constructor(
