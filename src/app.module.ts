@@ -10,6 +10,8 @@ import { SectionsCategoriesModule } from '#src/core/sections-categories/sections
 import { SectionsModule } from '#src/core/sections/sections.module';
 import { NewsModule } from '#src/core/news/news.module';
 import { EventsModule } from '#src/core/events/events.module';
+import { EventCategoriesModule } from '#src/core/event-categories/event-categories.module';
+import { AssetsModule } from '#src/core/assets/assets.module';
 
 @Module({
   imports: [
@@ -21,6 +23,8 @@ import { EventsModule } from '#src/core/events/events.module';
     SectionsModule,
     NewsModule,
     EventsModule,
+    EventCategoriesModule,
+    AssetsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

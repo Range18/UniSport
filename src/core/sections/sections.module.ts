@@ -13,5 +13,6 @@ import { AssetEntity } from '#src/core/assets/entities/asset.entity';
   ],
   controllers: [SectionsController],
   providers: [SectionsService],
+  exports: [SectionsService],
 })
 export class SectionsModule {}
