@@ -16,7 +16,7 @@ export class GetSectionRdo {
   @ApiProperty({ type: GetSectionCategoryRdo })
   readonly category: GetSectionCategoryRdo;
 
-  @ApiProperty({ nullable: true, required: false })
+  @ApiProperty({ nullable: true })
   readonly description?: string;
 
   @ApiProperty()
@@ -25,8 +25,14 @@ export class GetSectionRdo {
   @ApiProperty()
   readonly rating: number;
 
-  @ApiProperty()
-  readonly timetable: string;
+  @ApiProperty({ nullable: true })
+  days?: string;
+
+  @ApiProperty({ nullable: true })
+  beginningAt?: Date;
+
+  @ApiProperty({ nullable: true })
+  endingAt?: Date;
 
   @ApiProperty({ nullable: true, type: GetFileRdo })
   readonly image?: GetFileRdo;
@@ -43,7 +49,9 @@ export class GetSectionRdo {
     this.age = section.age;
     this.address = section.address;
     this.description = section.description;
-    this.timetable = section.timetable;
+    this.days = section.days;
+    this.beginningAt = section.beginningAt;
+    this.endingAt = section.endingAt;
     this.category = new GetSectionCategoryRdo(section.category);
     this.rating = section.rating;
 

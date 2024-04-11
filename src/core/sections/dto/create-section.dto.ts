@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class CreateSectionDto {
   @ApiProperty()
@@ -23,7 +23,18 @@ export class CreateSectionDto {
   @IsString()
   readonly name: string;
 
-  @ApiProperty()
+  @ApiProperty({ nullable: true, required: false })
   @IsString()
-  readonly timetable: string;
+  @IsOptional()
+  days?: string;
+
+  @ApiProperty({ nullable: true, required: false })
+  @IsDate()
+  @IsOptional()
+  beginningAt?: Date;
+
+  @ApiProperty({ nullable: true, required: false })
+  @IsDate()
+  @IsOptional()
+  endingAt?: Date;
 }

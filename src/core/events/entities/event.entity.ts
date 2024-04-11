@@ -28,7 +28,10 @@ export class Event extends BaseEntity {
   age?: string;
 
   @Column({ nullable: true })
-  date?: string;
+  beginningAt?: Date;
+
+  @Column({ nullable: true })
+  endingAt?: Date;
 
   @OneToOne(() => AssetEntity, (image) => image.event, {
     nullable: true,

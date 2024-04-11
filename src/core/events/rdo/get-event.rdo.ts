@@ -17,7 +17,10 @@ export class GetEventRdo {
   readonly age?: string;
 
   @ApiProperty({ nullable: true })
-  readonly date?: string;
+  beginningAt?: Date;
+
+  @ApiProperty({ nullable: true })
+  endingAt?: Date;
 
   @ApiProperty({ nullable: true })
   readonly category: EventCategory;
@@ -39,7 +42,8 @@ export class GetEventRdo {
     this.name = event.name;
     this.description = event.description;
     this.age = event.age;
-    this.date = event.date;
+    this.beginningAt = event.beginningAt;
+    this.endingAt = event.endingAt;
     this.price = event.price;
     this.category = event.category;
 

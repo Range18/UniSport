@@ -24,8 +24,14 @@ export class Section extends BaseEntity {
   @Column({ nullable: false })
   address: string;
 
-  @Column({ nullable: false })
-  timetable: string;
+  @Column({ nullable: true })
+  days: string;
+
+  @Column({ nullable: true })
+  beginningAt?: Date;
+
+  @Column({ nullable: true })
+  endingAt?: Date;
 
   @Column({ nullable: false })
   age: string;
