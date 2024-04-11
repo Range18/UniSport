@@ -21,7 +21,12 @@ export class EventsController {
 
   @Post()
   async create(@Body() createEventDto: CreateEventDto) {
-    return new GetEventRdo(await this.eventsService.save(createEventDto));
+    return new GetEventRdo(
+      await this.eventsService.save({
+        ...createEventDto,
+        category: { id: createEventDto.category },
+      }),
+    );
   }
 
   @ApiQuery({ name: 'category', type: String })

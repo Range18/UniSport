@@ -19,15 +19,11 @@ import {
   ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
-import { SectionsCategoriesService } from '#src/core/sections-categories/sections-categories.service';
 
 @ApiTags('Sections')
 @Controller('api/sections')
 export class SectionsController {
-  constructor(
-    private readonly sectionsService: SectionsService,
-    private readonly sectionsCategoryService: SectionsCategoriesService,
-  ) {}
+  constructor(private readonly sectionsService: SectionsService) {}
 
   @ApiBody({ type: CreateSectionDto })
   @ApiCreatedResponse({ type: GetSectionRdo })
@@ -36,9 +32,7 @@ export class SectionsController {
     return new GetSectionRdo(
       await this.sectionsService.save({
         ...createSectionDto,
-        category: await this.sectionsCategoryService.findOne({
-          where: { id: createSectionDto.categoryId },
-        }),
+        category: { id: createSectionDto.categoryId },
       }),
     );
   }

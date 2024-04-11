@@ -24,8 +24,8 @@ export class Event extends BaseEntity {
   @Column({ nullable: false })
   price: number;
 
-  @Column({ nullable: false })
-  type?: string;
+  @Column({ nullable: true })
+  age?: string;
 
   @Column({ nullable: true })
   date?: string;

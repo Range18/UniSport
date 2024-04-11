@@ -11,7 +11,9 @@ import {
 import { AssetsService } from './assets.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { type Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Assets')
 @Controller('api')
 export class AssetsController {
   constructor(private readonly assetsService: AssetsService) {}

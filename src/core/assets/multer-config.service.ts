@@ -19,16 +19,20 @@ export class MulterConfigService implements MulterOptionsFactory {
             return callback(new Error('file extension is not allowed'), '');
           }
 
-          const regex = '/sections|users|events/gm';
-
-          const type = regex.match(req.url);
-          if (type.includes('users')) {
+          if (req.url.includes('users')) {
             return callback(
               null,
               join(storageConfig.path, storageConfig.innerAvatars),
             );
+          } else if (req.url.includes('events')) {
+            return callback(null, join(storageConfig.path, 'events'));
+          } else if (req.url.includes('sections')) {
+            return callback(null, join(storageConfig.path, 'sections'));
+          } else if (req.url.includes('news')) {
+            return callback(null, join(storageConfig.path, 'news'));
           }
-          return callback(null, join(storageConfig.path, type.join('')));
+
+          return callback(new Error('not allowed'), '');
         },
         filename(
           req: Request,

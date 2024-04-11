@@ -131,7 +131,7 @@ export class AssetsService extends BaseEntityService<
     }
 
     if (entity.image) {
-      await unlink(join(storageConfig.path, entity.image.name));
+      await unlink(entity.image.path);
 
       await this.removeOne(entity.image);
     }
@@ -157,7 +157,7 @@ export class AssetsService extends BaseEntityService<
     }
 
     try {
-      const stream = createReadStream(join(image.path, image.name));
+      const stream = createReadStream(image.path);
 
       return { buffer: new StreamableFile(stream), mimetype: image.mimetype };
     } catch (error) {
