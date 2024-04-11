@@ -22,6 +22,9 @@ export class GetSectionRdo {
   readonly name: string;
 
   @ApiProperty()
+  readonly rating: number;
+
+  @ApiProperty()
   readonly timetable: string;
 
   @ApiProperty()
@@ -38,6 +41,7 @@ export class GetSectionRdo {
     this.description = section.description;
     this.timetable = section.timetable;
     this.category = new GetSectionCategoryRdo(section.category);
+    this.rating = section.rating;
 
     this.createdAt = section.createdAt;
     this.updatedAt = section.updatedAt;

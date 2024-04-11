@@ -18,6 +18,14 @@ export namespace AllExceptions {
   export enum SectionCategoryExceptions {
     SectionCategoryNotFound = 'SectionCategory is not found',
   }
+
+  export enum GroundExceptions {
+    NotFound = 'Ground is not found',
+  }
+
+  export enum EventExceptions {
+    EventNotFound = 'Event is not found',
+  }
   export enum UserExceptions {
     UserNotFound = 'User is not found',
     UserAlreadyExists = 'User already exists',
@@ -39,7 +47,12 @@ export namespace AllExceptions {
     NotFound = 'Role is not found',
   }
 
+  export enum NewsExceptions {
+    NotFound = 'Post is not found',
+  }
+
   export enum StorageExceptions {
+    FileNotFound = 'File not found',
     ExtNotAllowed = 'File extension is not allowed',
   }
 

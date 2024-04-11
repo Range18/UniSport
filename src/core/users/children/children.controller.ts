@@ -7,6 +7,7 @@ import { AddOrRemoveChildDto } from '#src/core/users/children/dto/addChild.dto';
 import {
   ApiBody,
   ApiCreatedResponse,
+  ApiHeader,
   ApiOkResponse,
   ApiTags,
 } from '@nestjs/swagger';
@@ -22,6 +23,10 @@ export class ChildrenController {
     private readonly userService: UserService,
   ) {}
 
+  @ApiHeader({
+    name: 'Authorization',
+    schema: { nullable: false, format: `Bearer token` },
+  })
   @ApiBody({ type: AddOrRemoveChildDto })
   @ApiCreatedResponse({ type: GetUserRdo })
   @RolesGuard('parent')
@@ -36,6 +41,10 @@ export class ChildrenController {
     );
   }
 
+  @ApiHeader({
+    name: 'Authorization',
+    schema: { nullable: false, format: `Bearer token` },
+  })
   @AuthGuard()
   @ApiOkResponse({ type: [GetUserRdo] })
   @Get()
@@ -48,6 +57,10 @@ export class ChildrenController {
     return userEntity.children.map((child) => new GetUserRdo(child));
   }
 
+  @ApiHeader({
+    name: 'Authorization',
+    schema: { nullable: false, format: `Bearer token` },
+  })
   @ApiBody({ type: AddOrRemoveChildDto })
   @ApiOkResponse({ type: GetUserRdo })
   @AuthGuard()
