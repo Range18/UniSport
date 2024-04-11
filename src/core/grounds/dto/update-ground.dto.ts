@@ -25,7 +25,7 @@ export class UpdateGroundDto {
   @ApiProperty({ nullable: true, required: false })
   @IsString()
   @IsOptional()
-  readonly long?: string;
+  readonly longitude?: string;
 
   @ApiProperty({ nullable: true, required: false })
   @IsString()

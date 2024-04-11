@@ -51,8 +51,8 @@ export namespace AllExceptions {
     NotFound = 'Role is not found',
   }
 
-  export enum NewsExceptions {
-    NotFound = 'Post is not found',
+  export enum RecommendationsExceptions {
+    NotFound = 'Recommendation is not found',
   }
 
   export enum StorageExceptions {

@@ -18,7 +18,7 @@ export class GetGroundRdo {
   latitude: string;
 
   @ApiProperty()
-  long: string;
+  longitude: string;
 
   @ApiProperty()
   rating: number;
@@ -39,7 +39,7 @@ export class GetGroundRdo {
     this.description = ground.description;
     this.timetable = ground.timetable;
     this.rating = ground.rating;
-    this.long = ground.long;
+    this.longitude = ground.longitude;
     this.latitude = ground.latitude;
     this.createdAt = ground.createdAt;
     this.updatedAt = ground.updatedAt;

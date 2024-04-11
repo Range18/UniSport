@@ -21,7 +21,7 @@ export class Event extends BaseEntity {
   @Column({ type: 'longtext', nullable: true })
   description?: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, default: 0 })
   price: number;
 
   @Column({ nullable: true })

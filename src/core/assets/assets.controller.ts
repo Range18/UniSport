@@ -12,6 +12,7 @@ import { AssetsService } from './assets.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { type Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
+import { GetFileRdo } from '#src/core/assets/rdo/get-file.rdo';
 
 @ApiTags('Assets')
 @Controller('api')
@@ -24,7 +25,7 @@ export class AssetsController {
     @UploadedFile() file: Express.Multer.File,
     @Param('id') id: number,
   ) {
-    return await this.assetsService.upload(file, id, 'section');
+    return new GetFileRdo(await this.assetsService.upload(file, id, 'section'));
   }
 
   @UseInterceptors(FileInterceptor('file'))
@@ -33,16 +34,18 @@ export class AssetsController {
     @UploadedFile() file: Express.Multer.File,
     @Param('id') id: number,
   ) {
-    return await this.assetsService.upload(file, id, 'user');
+    return new GetFileRdo(await this.assetsService.upload(file, id, 'user'));
   }
 
   @UseInterceptors(FileInterceptor('file'))
-  @Post('/news/:id/assets')
-  async uploadNewsImage(
+  @Post('/recommendations/:id/assets')
+  async uploadRecommendationsImage(
     @UploadedFile() file: Express.Multer.File,
     @Param('id') id: number,
   ) {
-    return await this.assetsService.upload(file, id, 'news');
+    return new GetFileRdo(
+      await this.assetsService.upload(file, id, 'recommendations'),
+    );
   }
 
   @UseInterceptors(FileInterceptor('file'))
@@ -51,7 +54,7 @@ export class AssetsController {
     @UploadedFile() file: Express.Multer.File,
     @Param('id') id: number,
   ) {
-    return await this.assetsService.upload(file, id, 'event');
+    return new GetFileRdo(await this.assetsService.upload(file, id, 'event'));
   }
 
   @Get('assets/:id/file')
@@ -70,7 +73,7 @@ export class AssetsController {
   @Get('assets/:id')
   @Get('assets/:id')
   async findOne(@Param('id') id: number) {
-    return await this.assetsService.findOne({ where: { id } });
+    return new GetFileRdo(await this.assetsService.findOne({ where: { id } }));
   }
 
   @Delete('assets/:id')

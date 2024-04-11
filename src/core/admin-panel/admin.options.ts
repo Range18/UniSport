@@ -6,7 +6,7 @@ import { Section } from '#src/core/sections/entities/section.entity';
 import { SectionsCategory } from '#src/core/sections-categories/entities/sections-category.entity';
 import { EventCategory } from '#src/core/event-categories/entities/event-category.entity';
 import { AssetEntity } from '#src/core/assets/entities/asset.entity';
-import { News } from '#src/core/news/entities/news.entity';
+import { Recommendations } from '#src/core/recommendations/entities/recommendations.entity';
 import { Ground } from '#src/core/grounds/entities/ground.entity';
 
 export const adminOptions = {
@@ -20,7 +20,7 @@ export const adminOptions = {
       SectionsCategory,
       EventCategory,
       AssetEntity,
-      News,
+      Recommendations,
       Ground,
     ],
   },

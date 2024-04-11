@@ -15,13 +15,13 @@ import { Event } from '#src/core/events/entities/event.entity';
 import { EventsService } from '#src/core/events/events.service';
 import { createReadStream } from 'fs';
 import { UserService } from '#src/core/users/user.service';
-import { NewsService } from '#src/core/news/news.service';
-import { News } from '#src/core/news/entities/news.entity';
+import { RecommendationsService } from '#src/core/recommendations/recommendations.service';
+import { Recommendations } from '#src/core/recommendations/entities/recommendations.entity';
 import StorageExceptions = AllExceptions.StorageExceptions;
 import SectionExceptions = AllExceptions.SectionExceptions;
 import EventExceptions = AllExceptions.EventExceptions;
 import UserExceptions = AllExceptions.UserExceptions;
-import NewsExceptions = AllExceptions.NewsExceptions;
+import RecommendationsExceptions = AllExceptions.RecommendationsExceptions;
 
 @Injectable()
 export class AssetsService extends BaseEntityService<
@@ -34,7 +34,7 @@ export class AssetsService extends BaseEntityService<
     private readonly sectionsService: SectionsService,
     private readonly eventsService: EventsService,
     private readonly userService: UserService,
-    private readonly newsService: NewsService,
+    private readonly recommendationsService: RecommendationsService,
   ) {
     super(
       assetsRepository,
@@ -49,9 +49,9 @@ export class AssetsService extends BaseEntityService<
   async upload(
     file: Express.Multer.File,
     id: number,
-    type: 'section' | 'event' | 'user' | 'news',
+    type: 'section' | 'event' | 'user' | 'recommendations',
   ) {
-    let entity: Section | Event | News;
+    let entity: Section | Event | Recommendations;
 
     switch (type) {
       case 'section':
@@ -114,8 +114,8 @@ export class AssetsService extends BaseEntityService<
         });
       }
 
-      case 'news':
-        entity = await this.newsService.findOne({
+      case 'recommendations':
+        entity = await this.recommendationsService.findOne({
           where: { id },
           relations: { image: true },
         });
@@ -123,8 +123,8 @@ export class AssetsService extends BaseEntityService<
         if (!entity) {
           throw new ApiException(
             HttpStatus.NOT_FOUND,
-            'NewsExceptions',
-            NewsExceptions.NotFound,
+            'RecommendationsExceptions',
+            RecommendationsExceptions.NotFound,
           );
         }
         break;

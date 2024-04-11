@@ -20,7 +20,7 @@ export class CreateGroundDto {
 
   @ApiProperty()
   @IsString()
-  readonly long: string;
+  readonly longitude: string;
 
   @ApiProperty()
   @IsString()

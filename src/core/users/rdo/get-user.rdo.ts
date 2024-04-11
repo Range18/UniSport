@@ -1,6 +1,7 @@
 import { UserEntity } from '#src/core/users/user.entity';
 import { ApiProperty } from '@nestjs/swagger';
 import { RolesEntity } from '#src/core/roles/entity/roles.entity';
+import { GetFileRdo } from '#src/core/assets/rdo/get-file.rdo';
 
 export class GetUserRdo {
   @ApiProperty()
@@ -24,9 +25,8 @@ export class GetUserRdo {
   @ApiProperty({ type: () => [GetUserRdo] })
   readonly parents: GetUserRdo[];
 
-  //TODO
-  // @ApiProperty()
-  // readonly avatar?: string;
+  @ApiProperty({ nullable: true, type: GetFileRdo })
+  readonly avatar?: GetFileRdo;
 
   @ApiProperty()
   readonly updatedAt: Date;
@@ -52,10 +52,8 @@ export class GetUserRdo {
     } else {
       this.parents = [];
     }
-    //TODO
-    // this.avatar = user.avatar?.name
-    //   ? `${backendServer.urlValue}/api/users/assets/avatars/${user.avatar.name}`
-    //   : undefined;
+
+    this.avatar = user.avatar ? new GetFileRdo(user.avatar) : undefined;
 
     this.updatedAt = user.updatedAt;
     this.createdAt = user.createdAt;

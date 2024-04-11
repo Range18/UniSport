@@ -16,7 +16,7 @@ export class UserController {
   @Get()
   async getAllUsers() {
     const users = await this.userService.find({
-      relations: { role: true, parents: true, children: true },
+      relations: { role: true, parents: true, children: true, avatar: true },
     });
 
     return users.map((user) => new GetUserRdo(user));
@@ -29,7 +29,12 @@ export class UserController {
       await this.userService.findOne(
         {
           where: { id },
-          relations: { role: true, parents: true, children: true },
+          relations: {
+            role: true,
+            parents: true,
+            children: true,
+            avatar: true,
+          },
         },
         true,
       ),
@@ -48,7 +53,7 @@ export class UserController {
     return new GetUserRdo(
       await this.userService.findOne({
         where: { id: user.id },
-        relations: { role: true, parents: true, children: true },
+        relations: { role: true, parents: true, children: true, avatar: true },
       }),
     );
   }

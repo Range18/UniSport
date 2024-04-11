@@ -1,9 +1,16 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseEntity } from '#src/common/base.entity';
 import { Section } from '#src/core/sections/entities/section.entity';
 import { Event } from '#src/core/events/entities/event.entity';
-import { News } from '#src/core/news/entities/news.entity';
+import { Recommendations } from '#src/core/recommendations/entities/recommendations.entity';
 import { UserEntity } from '#src/core/users/user.entity';
+import { Ground } from '#src/core/grounds/entities/ground.entity';
 
 @Entity('assets')
 export class AssetEntity extends BaseEntity {
@@ -34,15 +41,21 @@ export class AssetEntity extends BaseEntity {
   })
   event?: Event;
 
-  @OneToOne(() => News, (news) => news.image, {
+  @OneToOne(() => Recommendations, (recommendation) => recommendation.image, {
     nullable: true,
     onDelete: 'CASCADE',
   })
-  news?: News;
+  recommendations?: Recommendations;
 
   @OneToOne(() => UserEntity, (user) => user.avatar, {
     nullable: true,
     onDelete: 'CASCADE',
   })
   user?: UserEntity;
+
+  @OneToMany(() => Ground, (ground) => ground.image, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  grounds?: Ground[];
 }

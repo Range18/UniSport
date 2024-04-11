@@ -8,10 +8,11 @@ import { UserModule } from '#src/core/users/user.module';
 import { RolesModule } from '#src/core/roles/roles.module';
 import { SectionsCategoriesModule } from '#src/core/sections-categories/sections-categories.module';
 import { SectionsModule } from '#src/core/sections/sections.module';
-import { NewsModule } from '#src/core/news/news.module';
+import { RecommendationsModule } from '#src/core/recommendations/recommendations.module';
 import { EventsModule } from '#src/core/events/events.module';
 import { EventCategoriesModule } from '#src/core/event-categories/event-categories.module';
 import { AssetsModule } from '#src/core/assets/assets.module';
+import { GroundsModule } from '#src/core/grounds/grounds.module';
 
 @Module({
   imports: [
@@ -21,10 +22,11 @@ import { AssetsModule } from '#src/core/assets/assets.module';
     RolesModule,
     SectionsCategoriesModule,
     SectionsModule,
-    NewsModule,
+    RecommendationsModule,
     EventsModule,
     EventCategoriesModule,
     AssetsModule,
+    GroundsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

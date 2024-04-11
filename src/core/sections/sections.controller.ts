@@ -43,7 +43,7 @@ export class SectionsController {
   async findAll(@Query('type') type: string) {
     const sections = await this.sectionsService.find({
       where: { category: { name: type ? type : undefined } },
-      relations: { category: true },
+      relations: { category: true, image: true },
     });
 
     return sections.map((section) => new GetSectionRdo(section));
@@ -55,7 +55,7 @@ export class SectionsController {
     return new GetSectionRdo(
       await this.sectionsService.findOne({
         where: { id },
-        relations: { category: true },
+        relations: { category: true, image: true },
       }),
     );
   }

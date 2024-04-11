@@ -1,31 +1,26 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class UpdateEventDto {
+export class UpdateRecommendationDto {
   @ApiProperty({ nullable: true, required: false })
   @IsString()
   @IsOptional()
-  readonly name?: string;
-
-  @ApiProperty({ nullable: true, required: false })
-  @IsString()
-  @IsOptional()
-  readonly description?: string;
+  readonly title?: string;
 
   @ApiProperty({ nullable: true, required: false })
   @IsString()
   @IsOptional()
-  readonly age?: string;
+  readonly text?: string;
 
   @ApiProperty({ nullable: true, required: false })
-  @IsString()
+  @IsDate()
   @IsOptional()
-  readonly date?: string;
+  readonly beginningAt?: Date;
 
   @ApiProperty({ nullable: true, required: false })
-  @IsNumber()
+  @IsDate()
   @IsOptional()
-  readonly category?: number;
+  readonly endingAt?: Date;
 
   @ApiProperty({ nullable: true, required: false })
   @IsNumber()

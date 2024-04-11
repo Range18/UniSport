@@ -34,6 +34,7 @@ export class EventsController {
   async findAll(@Query('category') category: string) {
     const events = await this.eventsService.find({
       where: { category: { name: category ? category : undefined } },
+      relations: { category: true, image: true },
     });
 
     return events.map((event) => new GetEventRdo(event));
@@ -41,7 +42,12 @@ export class EventsController {
 
   @Get(':id')
   async findOne(@Param('id') id: number) {
-    return new GetEventRdo(await this.eventsService.findOne({ where: { id } }));
+    return new GetEventRdo(
+      await this.eventsService.findOne({
+        where: { id },
+        relations: { category: true, image: true },
+      }),
+    );
   }
 
   @Patch(':id')
@@ -50,7 +56,10 @@ export class EventsController {
     @Body() updateEventDto: UpdateEventDto,
   ) {
     return new GetEventRdo(
-      await this.eventsService.updateOne({ where: { id } }, updateEventDto),
+      await this.eventsService.updateOne(
+        { where: { id }, relations: { category: true } },
+        { ...updateEventDto, category: { id: updateEventDto.category } },
+      ),
     );
   }
 

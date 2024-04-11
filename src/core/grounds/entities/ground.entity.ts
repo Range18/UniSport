@@ -1,5 +1,12 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { BaseEntity } from '#src/common/base.entity';
+import { AssetEntity } from '#src/core/assets/entities/asset.entity';
 
 @Entity()
 export class Ground extends BaseEntity {
@@ -22,8 +29,15 @@ export class Ground extends BaseEntity {
   rating: number;
 
   @Column({ nullable: false })
-  long: string;
+  longitude: string;
 
   @Column({ nullable: false })
   latitude: string;
+
+  @ManyToOne(() => AssetEntity, (image) => image.grounds, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'image' })
+  readonly image?: AssetEntity;
 }

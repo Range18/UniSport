@@ -27,6 +27,5 @@ export class CreateEventDto {
 
   @ApiProperty()
   @IsNumber()
-  @IsOptional()
   readonly price: number;
 }

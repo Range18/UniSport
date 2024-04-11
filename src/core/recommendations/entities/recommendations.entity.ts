@@ -9,7 +9,7 @@ import { BaseEntity } from '#src/common/base.entity';
 import { AssetEntity } from '#src/core/assets/entities/asset.entity';
 
 @Entity()
-export class News extends BaseEntity {
+export class Recommendations extends BaseEntity {
   @PrimaryGeneratedColumn('increment')
   readonly id: number;
 
@@ -19,7 +19,16 @@ export class News extends BaseEntity {
   @Column({ nullable: false })
   text: string;
 
-  @OneToOne(() => AssetEntity, (image) => image.section, {
+  @Column({ nullable: false, default: 0 })
+  price: number;
+
+  @Column({ nullable: true })
+  beginningAt?: Date;
+
+  @Column({ nullable: true })
+  endingAt?: Date;
+
+  @OneToOne(() => AssetEntity, (image) => image.recommendations, {
     nullable: true,
     onDelete: 'SET NULL',
   })

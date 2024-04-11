@@ -10,18 +10,24 @@ import { EventsModule } from '#src/core/events/events.module';
 import { UserModule } from '#src/core/users/user.module';
 import { Section } from '#src/core/sections/entities/section.entity';
 import { Event } from '#src/core/events/entities/event.entity';
-import { News } from '#src/core/news/entities/news.entity';
+import { Recommendations } from '#src/core/recommendations/entities/recommendations.entity';
 import { UserEntity } from '#src/core/users/user.entity';
-import { NewsModule } from '#src/core/news/news.module';
+import { RecommendationsModule } from '#src/core/recommendations/recommendations.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([AssetEntity, Section, Event, News, UserEntity]),
+    TypeOrmModule.forFeature([
+      AssetEntity,
+      Section,
+      Event,
+      Recommendations,
+      UserEntity,
+    ]),
     MulterModule.registerAsync({ useClass: MulterConfigService }),
     SectionsModule,
     EventsModule,
     UserModule,
-    NewsModule,
+    RecommendationsModule,
   ],
   controllers: [AssetsController],
   providers: [AssetsService],

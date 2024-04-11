@@ -25,7 +25,9 @@ export class GroundsController {
 
   @Get()
   async findAll() {
-    const grounds = await this.groundsService.find({});
+    const grounds = await this.groundsService.find({
+      relations: { image: true },
+    });
 
     return grounds.map((ground) => new GetGroundRdo(ground));
   }
@@ -33,7 +35,10 @@ export class GroundsController {
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return new GetGroundRdo(
-      await this.groundsService.findOne({ where: { id } }),
+      await this.groundsService.findOne({
+        where: { id },
+        relations: { image: true },
+      }),
     );
   }
 

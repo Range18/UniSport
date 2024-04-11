@@ -28,8 +28,8 @@ export class MulterConfigService implements MulterOptionsFactory {
             return callback(null, join(storageConfig.path, 'events'));
           } else if (req.url.includes('sections')) {
             return callback(null, join(storageConfig.path, 'sections'));
-          } else if (req.url.includes('news')) {
-            return callback(null, join(storageConfig.path, 'news'));
+          } else if (req.url.includes('recommendations')) {
+            return callback(null, join(storageConfig.path, 'recommendations'));
           }
 
           return callback(new Error('not allowed'), '');
