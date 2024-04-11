@@ -2,6 +2,7 @@ import {
   Column,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -9,6 +10,7 @@ import {
 import { BaseEntity } from '#src/common/base.entity';
 import { SectionsCategory } from '#src/core/sections-categories/entities/sections-category.entity';
 import { AssetEntity } from '#src/core/assets/entities/asset.entity';
+import { UserEntity } from '#src/core/users/user.entity';
 
 @Entity()
 export class Section extends BaseEntity {
@@ -51,4 +53,9 @@ export class Section extends BaseEntity {
   })
   @JoinColumn({ name: 'image' })
   image?: AssetEntity;
+
+  @ManyToMany(() => UserEntity, (user) => user.courses, {
+    nullable: true,
+  })
+  coaches: UserEntity[];
 }

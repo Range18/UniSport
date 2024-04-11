@@ -13,6 +13,7 @@ import { SessionEntity } from '../session/session.entity';
 import { BaseEntity } from '#src/common/base.entity';
 import { RolesEntity } from '#src/core/roles/entity/roles.entity';
 import { AssetEntity } from '#src/core/assets/entities/asset.entity';
+import { Section } from '#src/core/sections/entities/section.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -66,4 +67,14 @@ export class UserEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'avatar' })
   avatar?: AssetEntity;
+
+  @ManyToMany(() => Section, (section) => section.coaches, {
+    nullable: true,
+  })
+  @JoinTable({
+    name: 'coaches_to_sections',
+    joinColumn: { name: 'coach', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'section', referencedColumnName: 'id' },
+  })
+  courses?: Section[];
 }
