@@ -9,6 +9,7 @@ import { RolesModule } from '#src/core/roles/roles.module';
 import { SectionsCategoriesModule } from '#src/core/sections-categories/sections-categories.module';
 import { SectionsModule } from '#src/core/sections/sections.module';
 import { NewsModule } from '#src/core/news/news.module';
+import { EventsModule } from '#src/core/events/events.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { NewsModule } from '#src/core/news/news.module';
     SectionsCategoriesModule,
     SectionsModule,
     NewsModule,
+    EventsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
