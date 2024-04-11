@@ -30,7 +30,7 @@ export class Section extends BaseEntity {
   @Column({ nullable: false })
   age: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, default: 0 })
   rating: number;
 
   @ManyToOne(() => SectionsCategory, (category) => category.sections, {

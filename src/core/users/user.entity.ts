@@ -6,11 +6,13 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { SessionEntity } from '../session/session.entity';
 import { BaseEntity } from '#src/common/base.entity';
 import { RolesEntity } from '#src/core/roles/entity/roles.entity';
+import { AssetEntity } from '#src/core/assets/entities/asset.entity';
 
 @Entity('users')
 export class UserEntity extends BaseEntity {
@@ -58,7 +60,10 @@ export class UserEntity extends BaseEntity {
   })
   sessions: SessionEntity[];
 
-  //TODO
-  // @OneToOne(() => AssetEntity, (avatar) => avatar.user, { nullable: true })
-  // avatar?: AssetEntity;
+  @OneToOne(() => AssetEntity, (image) => image.section, {
+    nullable: true,
+    onDelete: 'SET NULL',
+  })
+  @JoinColumn({ name: 'avatar' })
+  avatar?: AssetEntity;
 }

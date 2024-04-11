@@ -10,9 +10,17 @@ import { TokenService } from '#src/core/token/token.service';
 import { JwtService } from '@nestjs/jwt';
 import { ChildrenService } from '#src/core/users/children/children.service';
 import { ChildrenController } from '#src/core/users/children/children.controller';
+import { AssetEntity } from '#src/core/assets/entities/asset.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserEntity, RolesEntity, SessionEntity])],
+  imports: [
+    TypeOrmModule.forFeature([
+      UserEntity,
+      RolesEntity,
+      SessionEntity,
+      AssetEntity,
+    ]),
+  ],
   providers: [
     SessionService,
     TokenService,

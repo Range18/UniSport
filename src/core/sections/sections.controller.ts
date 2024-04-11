@@ -39,7 +39,6 @@ export class SectionsController {
         category: await this.sectionsCategoryService.findOne({
           where: { id: createSectionDto.categoryId },
         }),
-        rating: 0,
       }),
     );
   }

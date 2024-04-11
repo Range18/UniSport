@@ -10,6 +10,9 @@ export class SectionsCategory extends BaseEntity {
   @Column({ nullable: false })
   name: string;
 
-  @OneToMany(() => Section, (section) => section.category)
+  @OneToMany(() => Section, (section) => section.category, {
+    nullable: true,
+    onDelete: 'DEFAULT',
+  })
   sections?: Section[];
 }
