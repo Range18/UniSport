@@ -19,6 +19,10 @@ export namespace AllExceptions {
     SectionCategoryNotFound = 'SectionCategory is not found',
   }
 
+  export enum EventCategoryExceptions {
+    NotFound = 'EventCategory is not found',
+  }
+
   export enum GroundExceptions {
     NotFound = 'Ground is not found',
   }
