@@ -1,6 +1,7 @@
 import { GetFileRdo } from '#src/core/assets/rdo/get-file.rdo';
 import { ApiProperty } from '@nestjs/swagger';
 import { Recommendations } from '#src/core/recommendations/entities/recommendations.entity';
+import {backendServer} from "#src/common/configs/config";
 
 export class GetRecommendationRdo {
   @ApiProperty()
@@ -8,6 +9,9 @@ export class GetRecommendationRdo {
 
   @ApiProperty()
   readonly text: string;
+
+  @ApiProperty()
+  readonly link: string;
 
   @ApiProperty()
   readonly title: string;
@@ -21,8 +25,8 @@ export class GetRecommendationRdo {
   @ApiProperty()
   readonly price: number;
 
-  @ApiProperty({ nullable: true, type: GetFileRdo })
-  readonly image?: GetFileRdo;
+  @ApiProperty({ nullable: true })
+  readonly image?: string;
 
   @ApiProperty()
   readonly createdAt: Date;
@@ -34,12 +38,11 @@ export class GetRecommendationRdo {
     this.id = recommendations.id;
     this.text = recommendations.text;
     this.title = recommendations.title;
-    this.image = recommendations.image
-      ? new GetFileRdo(recommendations.image)
-      : undefined;
+    this.image = recommendations?.image ? `${backendServer.urlValue}/api/assets/${recommendations?.image.id}/file` : null
     this.beginningAt = recommendations.beginningAt;
     this.endingAt = recommendations.endingAt;
     this.price = recommendations.price;
+    this.link = recommendations.link
 
     this.createdAt = recommendations.createdAt;
     this.updatedAt = recommendations.updatedAt;

@@ -10,6 +10,10 @@ export class CreateRecommendationDto {
   @IsString()
   readonly text: string;
 
+  @ApiProperty()
+  @IsString()
+  readonly link: string;
+
   @ApiProperty({ nullable: true, required: false })
   @IsDate()
   @IsOptional()

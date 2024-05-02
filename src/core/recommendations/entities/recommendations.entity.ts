@@ -19,6 +19,9 @@ export class Recommendations extends BaseEntity {
   @Column({ nullable: false })
   text: string;
 
+  @Column({ nullable: true })
+  link: string;
+
   @Column({ nullable: false, default: 0 })
   price: number;
 
