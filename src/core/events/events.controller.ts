@@ -12,13 +12,19 @@ import { EventsService } from './events.service';
 import { CreateEventDto } from './dto/create-event.dto';
 import { UpdateEventDto } from './dto/update-event.dto';
 import { GetEventRdo } from '#src/core/events/rdo/get-event.rdo';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger';
 
 @ApiTags('Events')
 @Controller('api/events')
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
+  @ApiCreatedResponse({ type: GetEventRdo })
   @Post()
   async create(@Body() createEventDto: CreateEventDto) {
     return new GetEventRdo(
@@ -29,6 +35,7 @@ export class EventsController {
     );
   }
 
+  @ApiOkResponse({ type: [GetEventRdo] })
   @ApiQuery({ name: 'category', type: String })
   @Get()
   async findAll(@Query('category') category: string) {
@@ -40,6 +47,7 @@ export class EventsController {
     return events.map((event) => new GetEventRdo(event));
   }
 
+  @ApiOkResponse({ type: GetEventRdo })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return new GetEventRdo(
@@ -50,6 +58,7 @@ export class EventsController {
     );
   }
 
+  @ApiOkResponse({ type: GetEventRdo })
   @Patch(':id')
   async update(
     @Param('id') id: number,

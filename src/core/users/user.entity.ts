@@ -61,7 +61,7 @@ export class UserEntity extends BaseEntity {
   })
   sessions: SessionEntity[];
 
-  @OneToOne(() => AssetEntity, (image) => image.section, {
+  @OneToOne(() => AssetEntity, (image) => image.user, {
     nullable: true,
     onDelete: 'SET NULL',
   })

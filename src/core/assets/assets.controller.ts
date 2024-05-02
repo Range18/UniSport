@@ -11,7 +11,7 @@ import {
 import { AssetsService } from './assets.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { type Response } from 'express';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { GetFileRdo } from '#src/core/assets/rdo/get-file.rdo';
 
 @ApiTags('Assets')
@@ -19,6 +19,7 @@ import { GetFileRdo } from '#src/core/assets/rdo/get-file.rdo';
 export class AssetsController {
   constructor(private readonly assetsService: AssetsService) {}
 
+  @ApiCreatedResponse({ type: GetFileRdo })
   @UseInterceptors(FileInterceptor('file'))
   @Post('/sections/:id/assets')
   async uploadSectionImage(
@@ -28,6 +29,7 @@ export class AssetsController {
     return new GetFileRdo(await this.assetsService.upload(file, id, 'section'));
   }
 
+  @ApiCreatedResponse({ type: GetFileRdo })
   @UseInterceptors(FileInterceptor('file'))
   @Post('/users/:id/assets')
   async uploadUserAvatar(
@@ -37,6 +39,7 @@ export class AssetsController {
     return new GetFileRdo(await this.assetsService.upload(file, id, 'user'));
   }
 
+  @ApiCreatedResponse({ type: GetFileRdo })
   @UseInterceptors(FileInterceptor('file'))
   @Post('/recommendations/:id/assets')
   async uploadRecommendationsImage(
@@ -48,6 +51,7 @@ export class AssetsController {
     );
   }
 
+  @ApiCreatedResponse({ type: GetFileRdo })
   @UseInterceptors(FileInterceptor('file'))
   @Post('/events/:id/assets')
   async uploadEventImage(
@@ -70,6 +74,7 @@ export class AssetsController {
     return buffer;
   }
 
+  @ApiOkResponse({ type: GetFileRdo })
   @Get('assets/:id')
   @Get('assets/:id')
   async findOne(@Param('id') id: number) {

@@ -10,7 +10,7 @@ import {
 import { GroundsService } from './grounds.service';
 import { CreateGroundDto } from './dto/create-ground.dto';
 import { UpdateGroundDto } from './dto/update-ground.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { GetGroundRdo } from '#src/core/grounds/rdo/get-ground.rdo';
 
 @ApiTags('Grounds')
@@ -18,11 +18,13 @@ import { GetGroundRdo } from '#src/core/grounds/rdo/get-ground.rdo';
 export class GroundsController {
   constructor(private readonly groundsService: GroundsService) {}
 
+  @ApiCreatedResponse({ type: GetGroundRdo })
   @Post()
   async create(@Body() createGroundDto: CreateGroundDto) {
-    return await this.groundsService.save(createGroundDto);
+    return new GetGroundRdo(await this.groundsService.save(createGroundDto));
   }
 
+  @ApiOkResponse({ type: [GetGroundRdo] })
   @Get()
   async findAll() {
     const grounds = await this.groundsService.find({
@@ -32,6 +34,7 @@ export class GroundsController {
     return grounds.map((ground) => new GetGroundRdo(ground));
   }
 
+  @ApiOkResponse({ type: GetGroundRdo })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return new GetGroundRdo(
@@ -42,6 +45,7 @@ export class GroundsController {
     );
   }
 
+  @ApiOkResponse({ type: GetGroundRdo })
   @Patch(':id')
   async update(
     @Param('id') id: number,

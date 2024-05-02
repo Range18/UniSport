@@ -10,7 +10,7 @@ import {
 import { RecommendationsService } from './recommendations.service';
 import { CreateRecommendationDto } from './dto/create-recommendation.dto';
 import { UpdateRecommendationDto } from './dto/update-recommendation.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { GetRecommendationRdo } from '#src/core/recommendations/rdo/get-recommendation.rdo';
 
 @ApiTags('Recommendations')
@@ -20,6 +20,7 @@ export class RecommendationsController {
     private readonly recommendationsService: RecommendationsService,
   ) {}
 
+  @ApiCreatedResponse({ type: GetRecommendationRdo })
   @Post()
   async create(@Body() createRecommendationDto: CreateRecommendationDto) {
     return new GetRecommendationRdo(
@@ -27,6 +28,7 @@ export class RecommendationsController {
     );
   }
 
+  @ApiOkResponse({ type: [GetRecommendationRdo] })
   @Get()
   async findAll() {
     const recommendations = await this.recommendationsService.find({
@@ -36,6 +38,7 @@ export class RecommendationsController {
     return recommendations.map((entity) => new GetRecommendationRdo(entity));
   }
 
+  @ApiOkResponse({ type: GetRecommendationRdo })
   @Get(':id')
   async findOne(@Param('id') id: number) {
     return new GetRecommendationRdo(
@@ -46,6 +49,7 @@ export class RecommendationsController {
     );
   }
 
+  @ApiOkResponse({ type: GetRecommendationRdo })
   @Patch(':id')
   async update(
     @Param('id') id: number,
